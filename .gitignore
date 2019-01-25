@@ -9,3 +9,4 @@ show_video.py
 *.vec
 analysis.log
 scan_results/scene/
+segment/build/
