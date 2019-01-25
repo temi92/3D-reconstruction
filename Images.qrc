@@ -1,0 +1,7 @@
+<RCC>
+  <qresource prefix="Logos">
+    <file>LJMU.png</file>
+    <file>EURC.png</file>
+    <file>DigiArt Logo.png</file>
+  </qresource>
+</RCC>

@@ -1,0 +1,9 @@
+digiart@digiart-Surface-Pro-4:/etc/udev/rules.d/99-usb-serial.rules
+
+SUBSYSTEM=="tty",
+ATTRS{idVendor}=="0403",
+ATTRS{idProduct} == "6001",
+ATTRS{serial} == "A10654PY",   <- DEVICE SPECIFIC
+SYMLINK+="arduino"
+
+RUN DMESG

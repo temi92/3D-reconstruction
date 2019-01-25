@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=3D reconstruction
+Exec=python /home/digiart/DIGIART/gui_interface.py
+Icon=/home/digiart/DIGIART/LJMU.png
+Path=/home/digiart/DIGIART/
+Terminal=false
+Type=Application
+Categories=Utility;Application;
