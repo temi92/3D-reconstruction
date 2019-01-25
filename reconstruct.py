@@ -44,8 +44,12 @@ def genpointcloud():
 	p.wait()
 
 def filterpoints():
-	p = Popen([pcd_converter, "/home/temi/DIGIART/scan_results/pointcloud.ply", "/home/temi/DIGIART/scan_results/pointcloud.pcd"])
+	ply = os.path.join( os.getcwd(), "scan_results/pointcloud.ply")
+	pcd = os.path.join(os.getcwd(), "scan_results/pointcloud.pcd")
+	
+	p = Popen([pcd_converter, ply, pcd])
 	p.wait()
+	#filter_points takes in pcd format pointcloud...
 	p = Popen([filter_points])
 	p.wait()
 def createmesh():
