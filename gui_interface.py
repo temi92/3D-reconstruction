@@ -73,6 +73,7 @@ class Interface(QtGui.QMainWindow, design.Ui_MainWindow):
 	self.BTN_GenerateMeshFile.clicked.connect(self.gen_mesh)
 	self.BTN_FilterPointCloud.clicked.connect(self.pointcloud_filtering)
 
+	self.scan_folder = os.path.join(os.getcwd(), "scan_results") 
 
 	#sliders....
 	#self.Slider_PlaneFilter.valueChanged.connect(lambda:self.handle_slider_plane(self.Slider_PlaneFilter))
@@ -161,14 +162,14 @@ class Interface(QtGui.QMainWindow, design.Ui_MainWindow):
 
 
 	#delete pics folder ..
-	pics_folder = "/home/temi/DIGIART/scan_results/pics"
+	pics_folder = os.path.join(self.scan_folder, "pics")
 	filelist = [ f for f in os.listdir(pics_folder) if f.endswith(".png")]
 	for f in filelist:
 		os.remove(os.path.join(pics_folder,f))
 
 	
 	#remove scene folder...
-	dirpath = os.path.join("/home/temi/DIGIART/scan_results", "scene")
+	dirpath = os.path.join(self.scan_folder, "scene")
 	if os.path.exists(dirpath) and os.path.isdir(dirpath):
 		print "removed scene folder"
 		shutil.rmtree(dirpath)
@@ -202,13 +203,16 @@ class Interface(QtGui.QMainWindow, design.Ui_MainWindow):
 	
 
     def view_cloud(self):
-	if (os.path.exists("/home/temi/DIGIART/scan_results/pointcloud.ply")):
-		p = Popen('cd /home/temi/DIGIART/scan_results; meshlab pointcloud.ply', shell=True)
+        ply = os.path.join(self.scan_folder, "pointcloud.ply")
+	cmd = " ".join(["cd", self.scan_folder, ";", "meshlab", "pointcloud.ply"])
+	if (os.path.exists(ply)):
+		p = Popen(cmd, shell=True)
 		p.wait()
 	else:
 		QtGui.QMessageBox.critical(self.main_window, "Message", "failed to generate point cloud, consider increasing number of images taken and ensure the object is within FOV of camera")
     def view_filtered_pointcloud(self):
-	p = Popen('cd /home/temi/DIGIART/scan_results; meshlab final_cloud.ply', shell=True)
+	cmd = " ".join(["cd", self.scan_folder, ";", "meshlab", "final_cloud.ply"])	
+	p = Popen(cmd, shell=True)
 	p.wait()
 	
     def pointcloud_filtering(self):
@@ -221,14 +225,17 @@ class Interface(QtGui.QMainWindow, design.Ui_MainWindow):
 	QtGui.QMessageBox.information(self.main_window,"Done!", "Finished filtering point cloud")
 
     def view_mesh(self):
-	p = Popen('cd /home/temi/DIGIART/scan_results; meshlab surface_trimmed.ply', shell=True)
+	cmd = " ".join(["cd", self.scan_folder, ";", "meshlab", "surface_trimmed.ply"])
+	p = Popen(cmd, shell=True)
 	p.wait()
 
     def view_texturemesh(self):
         #TODO... process textured mesh and bind to buttion.
+	cmd = " ".join(["cd", self.scan_folder, ";", "meshlab", "textured.obj"])
+
 	QtGui.QMessageBox.information(self.main_window,"processing ..", "generating textured mesh this might take a few seconds")
 	texturemesh()
-	p = Popen('cd /home/temi/DIGIART/scan_results; meshlab textured.obj', shell=True)
+	p = Popen(cmd, shell=True)
 	p.wait()
 
 
