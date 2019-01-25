@@ -5,7 +5,6 @@ from config_parser import *
 
 ###entry point into the application ...
 base_path = os.getcwd()
-print base_path
 
 prep_scene = os.path.join(base_path, "executables/makescene")
 
