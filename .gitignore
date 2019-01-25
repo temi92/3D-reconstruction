@@ -1,5 +1,11 @@
 show_video.py
 *.pyc
+*.png
 *.swp
 *.ply
-
+*.conf
+*.spt
+*.pcd
+*.vec
+analysis.log
+scan_results/scene/
