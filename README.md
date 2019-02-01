@@ -7,3 +7,10 @@ Dependencies
 
 
 entry application into the program is the gui_interface.py
+
+USEFUL LINKS
+https://opencv.org/
+http://pointclouds.org/
+https://github.com/simonfuhrmann/mve
+
+
